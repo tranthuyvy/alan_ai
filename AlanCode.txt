@@ -1,0 +1,27 @@
+const API_KEY = 'ba357c464f234e1f87c8a5e9c35dc16a';
+let savedArticles = [];
+
+//News by source
+intent('Give me the news from $(source* (.*))', (p) => {
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}`
+    
+    if (p.source.value){
+        NEWS_API_URL = `${NEWS_API_URL}&source=${p.source.value.toLowerCase().split(" ").join('-')}`
+    }
+    
+    api.request(NEWS_API_URL, (error, response, body) => {
+        const { articles } = JSON.parse(body);
+        
+        if(!articles.length) {
+            p.play('Sorry, please try searching for news from a different source');
+            return;
+        }
+        
+        savedArticles = articles;
+        
+        p.play({ command: 'newHeadlines', articles });
+        p.play(`Here are the (latest|recent) ${p.source.value}.`);
+        
+
+    });
+})
