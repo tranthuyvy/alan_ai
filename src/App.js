@@ -1,16 +1,47 @@
 import React, { useState, useEffect } from "react";
+import { Typography } from "@material-ui/core";
+import wordsToNumbers from "words-to-numbers";
 import alanBtn from "@alan-ai/alan-sdk-web";
 
-const alanKey =
-  "c9b10b56abd5fe0376c02b15545232172e956eca572e1d8b807a3e2338fdd0dc/stage";
+import logo from "./images/logo.png";
+import { NewsCards, Modal } from "./components";
+import useStyles from "./styles";
 
 const App = () => {
+  const [activeArticle, setActiveArticle] = useState(0);
+  const [newsArticles, setNewsArticles] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const classes = useStyles();
+  const alanKey =
+    "c9b10b56abd5fe0376c02b15545232172e956eca572e1d8b807a3e2338fdd0dc/stage";
+
   useEffect(() => {
     alanBtn({
       key: alanKey,
-      onCommand: ({ command, articles }) => {
+      onCommand: ({ command, articles, number }) => {
         if (command === "newHeadlines") {
-          console.log(articles);
+          setNewsArticles(articles);
+          setActiveArticle(-1);
+        } else if (command === "instructions") {
+          setIsOpen(true);
+        } else if (command === "highlight") {
+          setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
+        } else if (command === "open") {
+          const parsedNumber =
+            number.length > 2
+              ? wordsToNumbers(number, { fuzzy: true })
+              : number;
+          const article = articles[parsedNumber - 1];
+
+          if (parsedNumber > articles.length) {
+            alanBtn().playText("Please try that again...");
+          } else if (article) {
+            window.open(article.url, "_blank");
+            alanBtn().playText("Opening...");
+          } else {
+            alanBtn().playText("Please try that again...");
+          }
         }
       },
     });
@@ -18,7 +49,57 @@ const App = () => {
 
   return (
     <div>
-      <h1>Hello, ttv</h1>
+      <div className={classes.logoContainer}>
+        {newsArticles.length ? (
+          <div className={classes.infoContainer}>
+            <div className={classes.card}>
+              <Typography variant="h5" component="h2">
+                Try saying: <br />
+                <br />
+                Open article number [4]
+              </Typography>
+            </div>
+            <div className={classes.card}>
+              <Typography variant="h5" component="h2">
+                Try saying: <br />
+                <br />
+                Go back
+              </Typography>
+            </div>
+          </div>
+        ) : null}
+        <img src="/logo.png" className={classes.VLogo} alt="logo" />
+      </div>
+      <NewsCards articles={newsArticles} activeArticle={activeArticle} />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      {!newsArticles.length ? (
+        <div className={classes.footer}>
+          <Typography variant="body1" component="h2">
+            Created by
+            <a
+              className={classes.link}
+              href="https://ttv-tranthuyvy-cv.vercel.app/"
+            >
+              {" "}
+              Tran Thuy Vy
+            </a>{" "}
+            -
+            <a
+              className={classes.link}
+              href="https://github.com/tranthuyvy?tab=repositories"
+            >
+              {" "}
+              TTV
+            </a>
+          </Typography>
+          <img
+            className={classes.image}
+            src={logo}
+            height="50px"
+            alt="TTV logo"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
