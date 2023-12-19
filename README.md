@@ -7,7 +7,7 @@
 # Home Page
 
 <div align=center>
-    <a href=""><img src="banner.png" /></a>
+    <a href=""><img src="/public/banner.png" /></a>
 </div>
 
 <br/>
@@ -15,7 +15,7 @@
 # News Page
 
 <div align=center>
-    <a href=""><img src="banner.png" /></a>
+    <a href=""><img src="/public/banner.png" /></a>
 </div>
 
 # Using
