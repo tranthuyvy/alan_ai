@@ -50,18 +50,18 @@ const App = () => {
       <div className={classes.logoContainer}>
         {newsArticles.length ? (
           <div className={classes.infoContainer}>
-            <div className={classes.card}>
+            {/* <div className={classes.card}>
               <Typography variant="h5" component="h2">
                 Try saying: <br />
                 <br />
-                Open article number [4]
+                Open article number [5]
               </Typography>
-            </div>
+            </div> */}
             <div className={classes.card}>
               <Typography variant="h5" component="h2">
-                Try saying: <br />
+                Try Saying: <br />
                 <br />
-                Go back
+                Go Back
               </Typography>
             </div>
           </div>

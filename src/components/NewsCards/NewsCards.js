@@ -30,15 +30,15 @@ const NewsCards = ({ articles, activeArticle }) => {
           className={classes.container}
           container
           alignItems="stretch"
-          spacing={6}
+          spacing={3}
         >
           {infoCards.map((infoCard) => (
             <Grid
               item
               xs={12}
-              sm={9}
-              md={6}
-              lg={4}
+              sm={6}
+              md={4}
+              lg={3}
               className={classes.infoCard}
             >
               <div
@@ -50,8 +50,7 @@ const NewsCards = ({ articles, activeArticle }) => {
                 </Typography>
                 {infoCard.info ? (
                   <Typography variant="h6" component="h6">
-                    <strong>{infoCard.title.split(" ")[2]}</strong>:
-                    <br />
+                    <strong>{infoCard.title.split(" ")[2]}</strong>: <br />
                     {infoCard.info}
                   </Typography>
                 ) : null}

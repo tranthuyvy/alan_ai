@@ -27,14 +27,14 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "50%",
-    padding: "3%",
+    width: "180px",
+    padding: "5%",
     borderRadius: 10,
     color: "white",
-    backgroundColor: "rgba(21, 101, 192)",
+    backgroundColor: "#873b2b",
     margin: "0 12px",
     textAlign: "center",
-    height: "25vmin",
+    height: "20vmin",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column-reverse",
       textAlign: "center",
@@ -43,6 +43,12 @@ export default makeStyles((theme) => ({
       "&:nth-of-type(1)": {
         marginBottom: "12px",
       },
+    },
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
+    transition: "box-shadow 0.3s ease-in-out",
+
+    "&:hover": {
+      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.8)",
     },
   },
   infoContainer: {

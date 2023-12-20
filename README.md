@@ -2,7 +2,9 @@
 
 # Introduction
 
-- A News Website
+- A News Website build a Conversational Voice Controlled React News Application using Alan AI.
+- Alan AI is a revolutionary speech recognition software that allows you to add voice capabilities to your applications.
+- It allows you to control absolutely everything in the app using your voice.
 
 # Home Page
 
@@ -15,7 +17,7 @@
 # News Page
 
 <div align=center>
-    <a href=""><img src="/public/banner.png" /></a>
+    <a href=""><img src="/public/banner1.png" /></a>
 </div>
 
 # Using
